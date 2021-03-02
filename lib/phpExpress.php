@@ -1,5 +1,5 @@
 <?php
-// Express Lib
+// Express Framework
 class Express
 {
     private $req, $sql;

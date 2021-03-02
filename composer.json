@@ -1,0 +1,13 @@
+{
+    "name": "devxian96/php-express",
+    "description": "Minimalist web library for PHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "DevXian",
+            "email": "coolman555@me.com"
+        }
+    ],
+    "require": {}
+}

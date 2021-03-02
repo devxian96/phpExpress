@@ -1,100 +1,100 @@
 <?php
-// Rest API Framework
-class res
+// Express Lib
+class Express
 {
-    protected $req, $sql;
-    public function __construct()
+    private $req, $sql;
+    public function __construct($sqla = null)
     {
         //Get Json data
         $this->req = json_decode(file_get_contents('php://input'), true);
-        $this->sql = new sql();
+        $this->sql = $sqla;
     }
 
     public static function send($result)
     {
-        global $sqla;
-        echo json_encode($result);
-        mysqli_close($sqla);
+        if (is_object($result)) {
+            echo json_encode($result);
+        } else {
+            echo $result;
+        }
         exit;
     }
 
     public function get($parm, $function)
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
             return;
-        } else if (empty($_GET['parm']) || $_GET['parm'] !== $parm) {
+        } else if (strcmp($_SERVER['REQUEST_URI'], $_SERVER['PHP_SELF'] . '?' . $parm)) {
             return;
         }
 
-        res::send($function($this->req, $this->sql));
+        http_response_code(200);
+        $this->send($function($this->req, $this->sql));
     }
 
     public function post($parm, $function)
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
             return;
-        } else if (empty($_GET['parm']) || $_GET['parm'] !== $parm) {
+        } else if (strcmp($_SERVER['REQUEST_URI'], $_SERVER['PHP_SELF'] . '?' . $parm)) {
             return;
         }
 
         http_response_code(201);
-        res::send($function($this->req, $this->sql));
+        $this->send($function($this->req, $this->sql));
     }
 
     public function put($parm, $function)
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
+        if ($_SERVER['REQUEST_METHOD'] != 'PUT') {
             return;
-        } else if (empty($_GET['parm']) || $_GET['parm'] !== $parm) {
+        } else if (strcmp($_SERVER['REQUEST_URI'], $_SERVER['PHP_SELF'] . '?' . $parm)) {
             return;
         }
 
-        res::send($function($this->req, $this->sql));
+        $this->send($function($this->req, $this->sql));
     }
 
     public function patch($parm, $function)
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
+        if ($_SERVER['REQUEST_METHOD'] != 'PATCH') {
             return;
-        } else if (empty($_GET['parm']) || $_GET['parm'] !== $parm) {
+        } else if (strcmp($_SERVER['REQUEST_URI'], $_SERVER['PHP_SELF'] . '?' . $parm)) {
             return;
         }
 
-        res::send($function($this->req, $this->sql));
+        $this->send($function($this->req, $this->sql));
     }
 
     public function delete($parm, $function)
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
+        if ($_SERVER['REQUEST_METHOD'] != 'DELETE') {
             return;
-        } else if (empty($_GET['parm']) || $_GET['parm'] !== $parm) {
+        } else if (strcmp($_SERVER['REQUEST_URI'], $_SERVER['PHP_SELF'] . '?' . $parm)) {
             return;
         }
 
-        res::send($function($this->req, $this->sql));
+        $this->send($function($this->req, $this->sql));
     }
 
     public function options($parm, $function)
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'OPTIONS') {
+        if ($_SERVER['REQUEST_METHOD'] != 'OPTIONS') {
             return;
-        } else if (empty($_GET['parm']) || $_GET['parm'] !== $parm) {
+        } else if (strcmp($_SERVER['REQUEST_URI'], $_SERVER['PHP_SELF'] . '?' . $parm)) {
             return;
         }
 
-        res::send($function($this->req, $this->sql));
+        $this->send($function($this->req, $this->sql));
     }
 }
-$res = new res();
 
-// SQL Framework
-class sql
+// Sequelize ORM
+class Sequelize
 {
-    protected $sqla;
-    public function __construct()
+    public function __construct($sqla)
     {
         //SQL Connection
-        global $sqla;
         $this->sqla = $sqla;
     }
 

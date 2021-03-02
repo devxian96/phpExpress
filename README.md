@@ -1,3 +1,3 @@
 # phpExpress
 
-Minimalist web library for <a href="http://nodejs.org" rel="nofollow">PHP</a>
+Minimalist web library for [phplink]: https://www.php.net/ "PHP"

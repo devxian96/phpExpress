@@ -1,3 +1,3 @@
 # phpExpress
 
-Minimalist web library for [phplink]: https://www.php.net/ "PHP"
+Minimalist web library for [PHP](https://www.php.net/)

@@ -3,7 +3,7 @@ require '../lib/phpExpress.php';
 
 $app = new phpExpress();
 
-// Request : http://localhost:3000/test/get.test.php?/test
+// Request : http://localhost:3000/test/get.test.php/test
 // Result : phpExpress
 $app->get('/test', static function ($req) {
     try {
@@ -14,7 +14,7 @@ $app->get('/test', static function ($req) {
     }
 });
 
-// Request : http://localhost:3000/test/get.test.php?/test2
+// Request : http://localhost:3000/test/get.test.php/test2
 // Result : {"msg":"phpExpress"}
 $app->get('/test2', static function ($req) {
     try {

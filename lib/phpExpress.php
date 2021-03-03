@@ -42,6 +42,12 @@ class phpExpress
         exit;
     }
 
+    public function listen()
+    {
+        http_response_code(404);
+        exit;
+    }
+
     public function get($parm, $function)
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {

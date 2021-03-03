@@ -24,3 +24,6 @@ $app->get('/test2', static function ($req) {
         return $e;
     }
 });
+
+// 404 return
+$app->listen();

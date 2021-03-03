@@ -1,6 +1,10 @@
 <?php
-// phpExpress Framework
-class Express
+/*
+ * phpExpress Framework v0.0.1 (https://github.com/devxian96/phpExpress)
+ * Copyright 2021 DevXian
+ * Licensed under MIT (https://github.com/devxian96/phpExpress/blob/main/LICENSE)
+ */
+class phpExpress
 {
     private $req;
     public function __construct()

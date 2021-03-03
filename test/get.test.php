@@ -1,7 +1,7 @@
 <?php
 require '../lib/phpExpress.php';
 
-$app = new Express();
+$app = new phpExpress();
 
 // Request : http://localhost:3000/test/get.test.php?/test
 // Result : phpExpress

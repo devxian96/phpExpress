@@ -2,7 +2,7 @@
 // phpExpress Framework
 class Express
 {
-    private $req, $sql;
+    private $req;
     public function __construct()
     {
         // Header Setting

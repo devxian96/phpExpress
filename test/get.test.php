@@ -3,11 +3,11 @@ require '../lib/phpExpress.php';
 
 $app = new phpExpress();
 
-// Request : http://localhost:3000/test/get.test.php/3/th/good
-// Result : 3th
-$app->get('/{id}/{text}/good', static function ($req) {
+// Request : http://localhost:3000/test/get.test.php/3/r/good/d
+// Result : 3rd
+$app->get('/{id}/{text}/good/{text2}', static function ($req) {
     try {
-        return $req["id"] . $req["text"];
+        return $req["id"] . $req["text"] . $req["text2"];
     } catch (Exception $e) {
         http_response_code(500);
         return $e;
@@ -16,7 +16,7 @@ $app->get('/{id}/{text}/good', static function ($req) {
 
 // Request : http://localhost:3000/test/get.test.php/test
 // Result : phpExpress
-$app->post('/test', static function ($req) {
+$app->get('/test', static function ($req) {
     try {
         return "phpExpress";
     } catch (Exception $e) {
@@ -27,7 +27,7 @@ $app->post('/test', static function ($req) {
 
 // Request : http://localhost:3000/test/get.test.php/test2
 // Result : {"msg":"phpExpress"}
-$app->post('/test2', static function ($req) {
+$app->get('/test2', static function ($req) {
     try {
         return (object) ["msg" => "phpExpress"];
     } catch (Exception $e) {

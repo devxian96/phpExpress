@@ -59,11 +59,47 @@ class phpExpress
         exit;
     }
 
+    /*
+    Usage: $this->->removePhpUrl(URL);
+    explain: Return 404 if no HTTP method was called
+     */
+    private function removePhpUrl($url)
+    {
+        return substr($url, strpos($url, ".php") + 4);
+    }
+
+    /*
+    Usage: $this->convertParm(parm);
+    explain: /{key} to /key
+     */
+    private function convertParm($parm)
+    {
+        $replaceParm = $parm;
+        $count = preg_match_all('/{/u', $parm);
+        for ($dataEnd = 0, $end = 0, $i = 0; $i < $count; ++$i) {
+            // parm spread
+            $start = strpos($parm, "{", $end) + 1;
+            $end = strpos($parm, "}", $start);
+
+            // query spread
+            $query = $this->removePhpUrl($_SERVER['REQUEST_URI']);
+            $dataStart = strpos($query, "/", $dataEnd) + 1;
+            $dataEnd = strpos($query, "/", $dataStart);
+
+            $key = substr($parm, $start, $end - $start);
+            $value = substr($query, $dataStart, $dataEnd - $dataStart);
+            $this->req[$key] = $value;
+            $replaceParm = str_replace("{" . $key . "}", $value, $replaceParm);
+        }
+        return $replaceParm;
+    }
+
     public function get($parm, $function)
     {
+        $parm = $this->convertParm($parm);
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             return;
-        } else if (strcmp($_SERVER['REQUEST_URI'], dirname($_SERVER['PHP_SELF']) . $parm)) {
+        } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {
             return;
         }
 
@@ -75,7 +111,7 @@ class phpExpress
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             return;
-        } else if (strcmp($_SERVER['REQUEST_URI'], dirname($_SERVER['PHP_SELF']) . $parm)) {
+        } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {
             return;
         }
 
@@ -87,7 +123,7 @@ class phpExpress
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
             return;
-        } else if (strcmp($_SERVER['REQUEST_URI'], dirname($_SERVER['PHP_SELF']) . $parm)) {
+        } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {
             return;
         }
 
@@ -98,7 +134,7 @@ class phpExpress
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
             return;
-        } else if (strcmp($_SERVER['REQUEST_URI'], dirname($_SERVER['PHP_SELF']) . $parm)) {
+        } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {
             return;
         }
 
@@ -109,7 +145,7 @@ class phpExpress
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
             return;
-        } else if (strcmp($_SERVER['REQUEST_URI'], dirname($_SERVER['PHP_SELF']) . $parm)) {
+        } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {
             return;
         }
 
@@ -120,7 +156,7 @@ class phpExpress
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'OPTIONS') {
             return;
-        } else if (strcmp($_SERVER['REQUEST_URI'], dirname($_SERVER['PHP_SELF']) . $parm)) {
+        } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {
             return;
         }
 

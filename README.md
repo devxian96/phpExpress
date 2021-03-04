@@ -12,12 +12,7 @@ Minimalist web framework for [PHP](https://www.php.net/)
   $app = new phpExpress();
 
   $app->get('/', function ($req) {
-      try {
-          return "Hello World";
-      } catch (Exception $e) {
-          http_response_code(500);
-          return $e;
-      }
+      return "Hello World";
   });
   
   $app->listen();

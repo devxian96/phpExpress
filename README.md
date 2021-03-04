@@ -1,5 +1,4 @@
 # phpExpress [![HitCount](http://hits.dwyl.com/DevXian/https://githubcom/devxian96/phpExpress.svg)](http://hits.dwyl.com/DevXian/https://githubcom/devxian96/phpExpress)
-## v0.0.1
 
 Minimalist web framework for [PHP](https://www.php.net/)
 

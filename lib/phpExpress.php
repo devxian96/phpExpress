@@ -61,7 +61,7 @@ class phpExpress
 
     /*
     Usage: $this->->removePhpUrl(URL);
-    explain: Return 404 if no HTTP method was called
+    explain: Remove string before .php
      */
     private function removePhpUrl($url)
     {
@@ -70,7 +70,7 @@ class phpExpress
 
     /*
     Usage: $this->convertParm(parm);
-    explain: /{key} to /key
+    explain: /{key} to /key and Allocate req varible
      */
     private function convertParm($parm)
     {

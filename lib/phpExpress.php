@@ -17,7 +17,7 @@ class phpExpress
         ob_start('ob_gzhandler'); //gzip
         header_remove('X-Powered-By'); // server type remove
         header_remove('Host'); // (https://webhint.io/docs/user-guide/hints/hint-no-disallowed-headers/?source=devtools)
-        header("Cache-Control: max-age=3600, private"); // (https://webhint.io/docs/user-guide/hints/hint-http-cache/?source=devtools)
+        header("Cache-Control: no-cache"); // (https://webhint.io/docs/user-guide/hints/hint-http-cache/?source=devtools)
         if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
             $url = "https://";
         } else {
@@ -49,6 +49,10 @@ class phpExpress
         exit;
     }
 
+    /*
+    Usage: class->listen();
+    explain: Return 404 if no HTTP method was called
+     */
     public function listen()
     {
         http_response_code(404);
@@ -59,7 +63,7 @@ class phpExpress
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             return;
-        } else if (strcmp($_SERVER['REQUEST_URI'], $_SERVER['PHP_SELF'])) {
+        } else if (strcmp($_SERVER['REQUEST_URI'], dirname($_SERVER['PHP_SELF']) . $parm)) {
             return;
         }
 
@@ -71,7 +75,7 @@ class phpExpress
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             return;
-        } else if (strcmp($_SERVER['REQUEST_URI'], $_SERVER['PHP_SELF'])) {
+        } else if (strcmp($_SERVER['REQUEST_URI'], dirname($_SERVER['PHP_SELF']) . $parm)) {
             return;
         }
 
@@ -83,7 +87,7 @@ class phpExpress
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
             return;
-        } else if (strcmp($_SERVER['REQUEST_URI'], $_SERVER['PHP_SELF'])) {
+        } else if (strcmp($_SERVER['REQUEST_URI'], dirname($_SERVER['PHP_SELF']) . $parm)) {
             return;
         }
 
@@ -94,7 +98,7 @@ class phpExpress
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
             return;
-        } else if (strcmp($_SERVER['REQUEST_URI'], $_SERVER['PHP_SELF'])) {
+        } else if (strcmp($_SERVER['REQUEST_URI'], dirname($_SERVER['PHP_SELF']) . $parm)) {
             return;
         }
 
@@ -105,7 +109,7 @@ class phpExpress
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
             return;
-        } else if (strcmp($_SERVER['REQUEST_URI'], $_SERVER['PHP_SELF'])) {
+        } else if (strcmp($_SERVER['REQUEST_URI'], dirname($_SERVER['PHP_SELF']) . $parm)) {
             return;
         }
 
@@ -116,7 +120,7 @@ class phpExpress
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'OPTIONS') {
             return;
-        } else if (strcmp($_SERVER['REQUEST_URI'], $_SERVER['PHP_SELF'])) {
+        } else if (strcmp($_SERVER['REQUEST_URI'], dirname($_SERVER['PHP_SELF']) . $parm)) {
             return;
         }
 

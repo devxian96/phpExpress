@@ -8,7 +8,7 @@ Minimalist web framework for [PHP](https://www.php.net/)
 [![GitHub license](https://img.shields.io/github/license/devxian96/phpExpress)](https://github.com/devxian96/phpExpress/blob/main/LICENSE)
 
 ```php
-  require '../lib/phpExpress.php';
+  require 'phpExpress.php';
   $app = new phpExpress();
 
   $app->get('/', function ($req) {

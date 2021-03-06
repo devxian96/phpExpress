@@ -33,6 +33,7 @@ class phpExpress
 
     public static function send($result, $cache = false)
     {
+        // cache option control
         if ($cache) {
             header("Cache-Control: max-age=3600"); // (https://webhint.io/docs/user-guide/hints/hint-http-cache/?source=devtools)
         } else {

@@ -42,6 +42,9 @@
 
 #### Standalone
 
+1. [Download](https://github.com/devxian96/phpExpress/releases) Framework file.
+2. Follow code sample.
+
 ```php
   require 'phpExpress.php';
   $app = new phpExpress();

@@ -3,11 +3,11 @@ require '../lib/phpExpress.php';
 
 $app = new phpExpress();
 
-// Request : http://localhost:3000/test/get.test.php/3/r/good/d
-// Result : 3rd
-$app->get('/{id}/{text}/good/{text2}', static function ($req) {
+// Request : http://localhost:3000/test/get.test.php/3/get
+// Result : 3
+$app->get('/{id}/get', static function ($req) {
     try {
-        return $req["id"] . $req["text"] . $req["text2"];
+        return $req["id"];
     } catch (Exception $e) {
         http_response_code(500);
         return $e;

@@ -74,6 +74,11 @@ class phpExpress
      */
     private function convertParm($parm)
     {
+        // If Same parm
+        if (strcmp($_SERVER['REQUEST_URI'], $parm)) {
+            return $parm;
+        }
+
         $replaceParm = $parm;
         $count = preg_match_all('/{/u', $parm);
         for ($dataEnd = 0, $end = 0, $i = 0; $i < $count; ++$i) {

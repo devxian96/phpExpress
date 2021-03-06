@@ -17,7 +17,6 @@ class phpExpress
         ob_start('ob_gzhandler'); //gzip
         header_remove('X-Powered-By'); // server type remove
         header_remove('Host'); // (https://webhint.io/docs/user-guide/hints/hint-no-disallowed-headers/?source=devtools)
-        header("Cache-Control: no-cache"); // (https://webhint.io/docs/user-guide/hints/hint-http-cache/?source=devtools)
         if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
             $url = "https://";
         } else {
@@ -32,8 +31,14 @@ class phpExpress
         $this->req = json_decode(file_get_contents('php://input'), true);
     }
 
-    public static function send($result)
+    public static function send($result, $cache = false)
     {
+        if ($cache) {
+            header("Cache-Control: max-age=3600"); // (https://webhint.io/docs/user-guide/hints/hint-http-cache/?source=devtools)
+        } else {
+            header("Cache-Control: no-cache");
+        }
+
         if (is_object($result)) { // JSON
             header('content-type: application/json; charset=utf-8');
             $len = strlen(json_encode($result));
@@ -109,7 +114,7 @@ class phpExpress
         }
 
         http_response_code(200);
-        $this->send($function($this->req));
+        $function($this->req, $this);
     }
 
     public function post($parm, $function)

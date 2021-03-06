@@ -11,9 +11,9 @@ Minimalist web framework for [PHP](https://www.php.net/)
   require 'phpExpress.php';
   $app = new phpExpress();
 
-  $app->get('/', function ($req) {
-      return "Hello World";
+  $app->get('/', function ($req, $res) {
+      $res->send("Hello World");
   });
-  
+
   $app->listen();
 ```

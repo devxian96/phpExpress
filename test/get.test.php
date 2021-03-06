@@ -5,9 +5,9 @@ $app = new phpExpress();
 
 // Request : http://localhost:3000/test/get.test.php/3/get
 // Result : 3
-$app->get('/{id}/get', static function ($req) {
+$app->get('/{id}/get', function ($req, $res) {
     try {
-        return $req["id"];
+        $res->send($req["id"]);
     } catch (Exception $e) {
         http_response_code(500);
         return $e;
@@ -16,9 +16,9 @@ $app->get('/{id}/get', static function ($req) {
 
 // Request : http://localhost:3000/test/get.test.php/test
 // Result : phpExpress
-$app->get('/test', static function ($req) {
+$app->get('/test', function ($req, $res) {
     try {
-        return "phpExpress";
+        $res->send("phpExpress");
     } catch (Exception $e) {
         http_response_code(500);
         return $e;
@@ -27,9 +27,9 @@ $app->get('/test', static function ($req) {
 
 // Request : http://localhost:3000/test/get.test.php/test2
 // Result : {"msg":"phpExpress"}
-$app->get('/test2', static function ($req) {
+$app->get('/test2', function ($req, $res) {
     try {
-        return (object) ["msg" => "phpExpress"];
+        $res->send((object) ["msg" => "phpExpress"]);
     } catch (Exception $e) {
         http_response_code(500);
         return $e;

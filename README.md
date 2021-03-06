@@ -32,7 +32,7 @@
 - Focus on high performance and Minimalist
 - HTTP helpers (redirection, caching, etc)
 - Support many headers
-- phpSequelize ORM, ==Affected by [Sequelize](https://github.com/sequelize/sequelize)==
+- phpSequelize ORM, Affected by [Sequelize](https://github.com/sequelize/sequelize)
 
 ## Getting started
 

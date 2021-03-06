@@ -1,6 +1,6 @@
 <center>
 
-![logo](https://github.com/devxian96/phpExpress/blob/main/phpExpressLogo.png?raw=true)
+[![logo](https://github.com/devxian96/phpExpress/blob/main/phpExpressLogo.png?raw=true)](https://github.com/devxian96/phpExpress)
 
 </center>
 
@@ -32,7 +32,7 @@
 - Focus on high performance and Minimalist
 - HTTP helpers (redirection, caching, etc)
 - Support many headers
-- phpSequelize ORM, Affected by [Sequelize](https://github.com/sequelize/sequelize)
+- phpSequelize ORM, ==Affected by [Sequelize](https://github.com/sequelize/sequelize)==
 
 ## Getting started
 

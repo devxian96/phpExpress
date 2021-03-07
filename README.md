@@ -28,7 +28,7 @@
 
 ## Getting started
 
-### Required
+### Requirement
 
 - php7 or higher
 

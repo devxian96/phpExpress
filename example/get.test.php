@@ -36,5 +36,18 @@ $app->get('/test2', function ($req, $res) {
     }
 });
 
+// Request : http://localhost:3000/test/get.test.php/argument?a=1
+// body : json {"b":2}
+// Result : 3
+$app->get('/argument', function ($req, $res) {
+    try {
+        $result = $req["a"] + $req["b"];
+        $res->send($result);
+    } catch (Exception $e) {
+        http_response_code(500);
+        return $e;
+    }
+});
+
 // 404 return
 $app->listen();

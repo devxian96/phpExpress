@@ -29,6 +29,10 @@ class phpExpress
 
         //Get Json data
         $this->req = json_decode(file_get_contents('php://input'), true);
+        //GET data
+        $this->req = array_merge((array) $_GET, (array) $this->req);
+        //POST data
+        $this->req = array_merge((array) $_POST, (array) $this->req);
     }
 
     public static function send($result, $cache = false)
@@ -71,7 +75,8 @@ class phpExpress
      */
     private function removePhpUrl($url)
     {
-        return substr($url, strpos($url, ".php") + 4);
+        $result = substr($url, strpos($url, ".php") + 4);
+        return substr($result, 0, strpos($result, "?"));
     }
 
     /*

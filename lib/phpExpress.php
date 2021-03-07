@@ -75,8 +75,14 @@ class phpExpress
      */
     private function removePhpUrl($url)
     {
-        $result = substr($url, strpos($url, ".php") + 4);
-        return substr($result, 0, strpos($result, "?"));
+        $result = $url; // org url
+        if (strpos($url, ".php")) {
+            $result = substr($url, strpos($url, ".php") + 4);
+        }
+        if (strpos($result, "?")) {
+            $result = substr($result, 0, strpos($result, "?"));
+        }
+        return $result;
     }
 
     /*
@@ -85,13 +91,8 @@ class phpExpress
      */
     private function convertParm($parm)
     {
-        // If Same parm
-        if (strcmp($_SERVER['REQUEST_URI'], $parm)) {
-            return $parm;
-        }
-
         $replaceParm = $parm;
-        $count = preg_match_all('/{/u', $parm);
+        $count = preg_match_all('/{/u', $replaceParm);
         for ($dataEnd = 0, $end = 0, $i = 0; $i < $count; ++$i) {
             // parm spread
             $start = strpos($parm, "{", $end) + 1;
@@ -113,6 +114,8 @@ class phpExpress
     public function get($parm, $function)
     {
         $parm = $this->convertParm($parm);
+        // echo $this->removePhpUrl($_SERVER['REQUEST_URI']) . "===" . $parm . "<br/>";
+
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             return;
         } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {

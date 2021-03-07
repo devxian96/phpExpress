@@ -114,8 +114,6 @@ class phpExpress
     public function get($parm, $function)
     {
         $parm = $this->convertParm($parm);
-        // echo $this->removePhpUrl($_SERVER['REQUEST_URI']) . "===" . $parm . "<br/>";
-
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
             return;
         } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {
@@ -128,6 +126,7 @@ class phpExpress
 
     public function post($parm, $function)
     {
+        $parm = $this->convertParm($parm);
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             return;
         } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {
@@ -135,50 +134,54 @@ class phpExpress
         }
 
         http_response_code(201);
-        $this->send($function($this->req));
+        $function($this->req, $this);
     }
 
     public function put($parm, $function)
     {
+        $parm = $this->convertParm($parm);
         if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
             return;
         } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {
             return;
         }
 
-        $this->send($function($this->req));
+        $function($this->req, $this);
     }
 
     public function patch($parm, $function)
     {
+        $parm = $this->convertParm($parm);
         if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
             return;
         } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {
             return;
         }
 
-        $this->send($function($this->req));
+        $function($this->req, $this);
     }
 
     public function delete($parm, $function)
     {
+        $parm = $this->convertParm($parm);
         if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
             return;
         } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {
             return;
         }
 
-        $this->send($function($this->req));
+        $function($this->req, $this);
     }
 
     public function options($parm, $function)
     {
+        $parm = $this->convertParm($parm);
         if ($_SERVER['REQUEST_METHOD'] !== 'OPTIONS') {
             return;
         } else if (strcmp($this->removePhpUrl($_SERVER['REQUEST_URI']), $parm)) {
             return;
         }
 
-        $this->send($function($this->req));
+        $function($this->req, $this);
     }
 }

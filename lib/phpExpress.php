@@ -35,7 +35,7 @@ class phpExpress
         $this->req = array_merge((array) $_POST, (array) $this->req);
     }
 
-    public static function send($result, $cache = false)
+    public static function send($result, bool $cache = false)
     {
         // cache option control
         if ($cache) {
@@ -73,7 +73,7 @@ class phpExpress
     Usage: $this->->removePhpUrl(URL);
     explain: Remove string before .php
      */
-    private function removePhpUrl($url)
+    private function removePhpUrl(string $url): string
     {
         $result = $url; // org url
         if (strpos($url, ".php")) {
@@ -89,7 +89,7 @@ class phpExpress
     Usage: $this->convertParm(parm);
     explain: /{key} to /key and Allocate req varible
      */
-    private function convertParm($parm)
+    private function convertParm(string $parm): string
     {
         $replaceParm = $parm;
         $count = preg_match_all('/{/u', $replaceParm);
@@ -111,7 +111,7 @@ class phpExpress
         return $replaceParm;
     }
 
-    public function get($parm, $function)
+    public function get(string $parm, $function)
     {
         $parm = $this->convertParm($parm);
         if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -124,7 +124,7 @@ class phpExpress
         $function($this->req, $this);
     }
 
-    public function post($parm, $function)
+    public function post(string $parm, $function)
     {
         $parm = $this->convertParm($parm);
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -137,7 +137,7 @@ class phpExpress
         $function($this->req, $this);
     }
 
-    public function put($parm, $function)
+    public function put(string $parm, $function)
     {
         $parm = $this->convertParm($parm);
         if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
@@ -149,7 +149,7 @@ class phpExpress
         $function($this->req, $this);
     }
 
-    public function patch($parm, $function)
+    public function patch(string $parm, $function)
     {
         $parm = $this->convertParm($parm);
         if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
@@ -161,7 +161,7 @@ class phpExpress
         $function($this->req, $this);
     }
 
-    public function delete($parm, $function)
+    public function delete(string $parm, $function)
     {
         $parm = $this->convertParm($parm);
         if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
@@ -173,7 +173,7 @@ class phpExpress
         $function($this->req, $this);
     }
 
-    public function options($parm, $function)
+    public function options(string $parm, $function)
     {
         $parm = $this->convertParm($parm);
         if ($_SERVER['REQUEST_METHOD'] !== 'OPTIONS') {

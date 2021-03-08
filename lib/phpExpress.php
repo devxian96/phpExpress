@@ -101,6 +101,10 @@ class phpExpress
             // query spread
             $query = $this->removePhpUrl($_SERVER['REQUEST_URI']);
             $dataStart = strpos($query, "/", $dataEnd) + 1;
+            if ($dataStart > 0) {
+                break;
+            }
+
             $dataEnd = strpos($query, "/", $dataStart);
 
             $key = substr($parm, $start, $end - $start);

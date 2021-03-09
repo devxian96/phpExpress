@@ -93,13 +93,13 @@ class phpExpress
     {
         $replaceParm = $parm;
         $count = preg_match_all('/{/u', $replaceParm);
+        $query = $this->removePhpUrl($_SERVER['REQUEST_URI']);
         for ($dataEnd = 0, $end = 0, $i = 0; $i < $count; ++$i) {
             // parm spread
             $start = strpos($parm, "{", $end) + 1;
             $end = strpos($parm, "}", $start);
 
             // query spread
-            $query = $this->removePhpUrl($_SERVER['REQUEST_URI']);
             $dataStart = strpos($query, "/", $dataEnd) + 1;
             if ($dataStart > 0) {
                 break;

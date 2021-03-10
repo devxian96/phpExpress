@@ -92,7 +92,7 @@ class phpExpress
     private function convertParm(string $parm): string
     {
         $replaceParm = $parm;
-        $count = preg_match_all('/{/u', $replaceParm);
+        $count = preg_match_all('/{/', $replaceParm);
         $query = $this->removePhpUrl($_SERVER['REQUEST_URI']);
         for ($dataEnd = 0, $end = 0, $i = 0; $i < $count; ++$i) {
             // parm spread

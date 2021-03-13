@@ -56,3 +56,7 @@ Coming soon.
 ## Examples
 
 Please take a look at [Example](https://github.com/devxian96/phpExpress/tree/main/example) page.
+
+## Notice
+
+phpSequlize is not ready

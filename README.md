@@ -1,5 +1,13 @@
 [![logo](https://github.com/devxian96/phpExpress/blob/main/phpExpressLogo.png?raw=true)](https://github.com/devxian96/phpExpress)
 
+<style>
+img {
+  display:block;
+  margin: 0 auto;
+  align: center;
+}
+</style>
+
 [![GitHub stars](https://img.shields.io/github/stars/devxian96/phpExpress)](https://github.com/devxian96/phpExpress/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/devxian96/phpExpress)](https://github.com/devxian96/phpExpress/network)
 [![GitHub issues](https://img.shields.io/github/issues/devxian96/phpExpress)](https://github.com/devxian96/phpExpress/issues)
